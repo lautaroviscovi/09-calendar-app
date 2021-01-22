@@ -11,6 +11,7 @@ import { uiOpenModal } from '../../actions/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { eventSetActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 const localizer = momentLocalizer( moment );
 
@@ -19,7 +20,7 @@ export const CalendarScreen = () => {
     const dispatch = useDispatch();
 
     // Lectura de los eventos (se muestra en el calendario)
-    const { events } = useSelector( state => state.calendar );
+    const { events, activeEvent } = useSelector( state => state.calendar );
 
     const [ lastView, setlastView ] = useState( localStorage.getItem( 'lastView' ) || 'month' );
 
@@ -75,6 +76,12 @@ export const CalendarScreen = () => {
             />
 
             <AddNewFab />
+            
+            {
+                
+                ( activeEvent ) && <DeleteEventFab />
+
+            }
 
             <CalendarModal />
 
