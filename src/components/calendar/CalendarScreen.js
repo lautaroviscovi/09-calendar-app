@@ -7,6 +7,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { NavBar } from '../ui/NavBar';
 import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
+import { uiOpenModal } from '../../actions/ui';
+import { useDispatch } from 'react-redux';
 
 const localizer = momentLocalizer( moment );
 
@@ -24,11 +26,13 @@ const events = [ {
 
 export const CalendarScreen = () => {
 
+    const dispatch = useDispatch();
+
     const [ lastView, setlastView ] = useState( localStorage.getItem( 'lastView' ) || 'month' );
 
     // Trae los datos de la agenda
     const onDoubleClick = ( e ) => {
-        console.log(e)
+        dispatch( uiOpenModal() );
     }
     // Selecciona el evento
     const onSelectEvent = ( e ) => {
