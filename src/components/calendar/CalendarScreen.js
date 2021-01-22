@@ -9,7 +9,7 @@ import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
 import { uiOpenModal } from '../../actions/ui';
 import { useDispatch, useSelector } from 'react-redux';
-import { eventSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventSetActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
 
@@ -40,6 +40,10 @@ export const CalendarScreen = () => {
         setlastView( e );
         localStorage.setItem( 'lastView', e );
     }
+    // Desactiva la nota seleccionada previamente
+    const onSelectSlot = ( e ) => {
+        dispatch( eventClearActiveEvent() );
+    }
     // Pack de estilos para el evento
     const eventStyleGetter = ( event, start, end, isSelected ) => {
 
@@ -68,6 +72,8 @@ export const CalendarScreen = () => {
                 eventPropGetter = { eventStyleGetter }
                 onDoubleClickEvent = { onDoubleClick }
                 onSelectEvent = { onSelectEvent }
+                onSelectSlot = { onSelectSlot }
+                selectable = { true }
                 onView = { onViewChange }
                 view = { lastView }
                 components = { {
