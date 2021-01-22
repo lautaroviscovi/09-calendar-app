@@ -2,7 +2,7 @@ import React from 'react';
 
 export const NavBar = () => {
     return (
-        <div className = 'navbar navbar-dar bg-dark mb-4'>
+        <div className = 'navbar navbar-dark bg-dark mb-4'>
             <span className = 'navbar-brand'>
                 Elon
             </span>
