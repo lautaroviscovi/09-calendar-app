@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import DateTimePicker from 'react-datetime-picker';
+import moment from 'moment';
 
 const customStyles = {
     content : {
@@ -14,19 +16,33 @@ const customStyles = {
 
   Modal.setAppElement('#root');
 
+  const now = moment().minutes( 0 ).seconds( 0 ).add( 1, 'hours' );
+
+  const after = now.clone().add( 1, 'hours' );
+
 export const CalendarModal = () => {
-    // Maneja el estado del modal
-    // Abierto o cerrado
-    const [ isOpen, setIsOpen ] = useState( true );
+    // Manejo del estado de las fechas
+    const [ dateStart, setDateStart ] = useState( now.toDate()  );
+
+    const [ dateEnd, setdateEnd ] = useState( after.toDate() );
 
     const closeModal = () => {
-        setIsOpen( false )
-    }
+        
+    };
+
+    const handleStartDateChange = ( e ) => {
+      setDateStart( e )
+    };
+
+    const handleEndDateChange = ( e ) => {
+      setdateEnd( e )
+      console.log(e)
+    };
 
     return (
             
             <Modal
-            isOpen = { isOpen }
+            isOpen = { true }
             onRequestClose = { closeModal }
             style = { customStyles }
             closeTimeoutMS = { 200  }
@@ -34,9 +50,62 @@ export const CalendarModal = () => {
             overlayClassName = 'modal-back'
             >
 
-                <h1> Hi World</h1>
-                <hr />
-                <span> Hi World again!</span>
+              <h1> Nuevo evento </h1>
+              <hr />
+              <form className="container">
+
+                  <div className="form-group">
+                      <label>Fecha y hora inicio</label>
+                        <DateTimePicker
+                          onChange = { handleStartDateChange }
+                          value = { dateStart }
+                          className = 'form-control'
+                          />
+                  </div>
+
+                  <div className="form-group">
+                      <label>Fecha y hora fin</label>
+                      <DateTimePicker
+                          onChange = { handleEndDateChange }
+                          minDate = { dateStart }
+                          value = { dateEnd }
+                          className = 'form-control'
+                          />
+                  </div>
+
+                  <hr />
+                  <div className="form-group">
+                      <label>Titulo y notas</label>
+                      <input 
+                          type="text" 
+                          className="form-control"
+                          placeholder="Título del evento"
+                          name="title"
+                          autoComplete="off"
+                      />
+                      <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
+                  </div>
+
+                  <div className="form-group">
+                      <textarea 
+                          type="text" 
+                          className="form-control"
+                          placeholder="Notas"
+                          rows="5"
+                          name="notes"
+                      ></textarea>
+                      <small id="emailHelp" className="form-text text-muted">Información adicional</small>
+                  </div>
+
+                  <button
+                      type="submit"
+                      className="btn btn-outline-primary btn-block"
+                  >
+                      <i className="far fa-save"></i>
+                      <span> Guardar</span>
+                  </button>
+
+              </form>
 
             </Modal>
 
