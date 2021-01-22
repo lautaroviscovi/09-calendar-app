@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { uiCloseModal } from '../../actions/ui';
+import { eventAddNew } from '../../actions/events';
 
 const customStyles = {
     content : {
@@ -88,7 +89,15 @@ export const CalendarModal = () => {
         return setTitleValid( false ); 
       }
 
-      // TODO => REALIZAR GRABACION
+      // Graba un nuevo evento en el calendario
+      dispatch( eventAddNew( {
+        ...formValues,
+        id: new Date().getTime(),
+        user: {
+          _id: '123',
+          name: 'Elon Musk'
+        }
+      } ) );
 
       setTitleValid( true );
       closeModal();
