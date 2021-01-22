@@ -8,27 +8,18 @@ import { NavBar } from '../ui/NavBar';
 import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
 import { uiOpenModal } from '../../actions/ui';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { eventSetActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
 
 const localizer = momentLocalizer( moment );
 
-const events = [ {
-    title: 'Test event',
-    start: moment().toDate(),
-    end: moment().add( 2, 'hours' ).toDate(),
-    bgcolor: '#fafafa',
-    notes: 'add',
-    user: {
-        _id: '123',
-        name: 'Elon'
-    }
-} ]
-
 export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
+
+    // Lectura de los eventos (se muestra en el calendario)
+    const { events } = useSelector( state => state.calendar );
 
     const [ lastView, setlastView ] = useState( localStorage.getItem( 'lastView' ) || 'month' );
 
@@ -39,7 +30,6 @@ export const CalendarScreen = () => {
     // Selecciona el evento y lo marca como activo en el state
     const onSelectEvent = ( e ) => {
         dispatch( eventSetActive( e ) );
-        dispatch( uiOpenModal() );
     }
     // Muestra la vista (dia, semana, mes, año)
     // El localStorage mantiene el estado
