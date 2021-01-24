@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../actions/events';
 
 const customStyles = {
     content : {
@@ -108,7 +108,7 @@ export const CalendarModal = () => {
       // Graba un nuevo evento en el calendario
       // Condiciona si el evento existe para editar o crear
       if ( activeEvent ){
-        dispatch( eventUpdated( formValues ) );
+        dispatch( eventStartUpdate( formValues ) );
       } else {
         dispatch( eventStartAddNew( {
           ...formValues,
