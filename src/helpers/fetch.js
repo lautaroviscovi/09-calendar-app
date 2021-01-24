@@ -1,6 +1,12 @@
 const baseUrl = process.env.REACT_APP_API_URL;
 
-
+/**
+ * Todas las peticiones que no requieren el token
+ * pasan por ésta función que va a seleccionar
+ * si estamos en ambiente de desarrollo o producción
+ * y va a convertir en string toda la data que llegue
+ * desde la DB
+ */
 export const fetchWithoutToken = ( endpoint, data, method = 'GET' ) => {
     const url = `${ baseUrl }/${ endpoint }`; // localhost:4000/api/auth localhost:4000/api/events
 
@@ -16,7 +22,13 @@ export const fetchWithoutToken = ( endpoint, data, method = 'GET' ) => {
         } )
     }
 };
-
+/**
+ * Todas las peticiones que requieren el token
+ * pasan por ésta función que va a seleccionar
+ * si estamos en ambiente de desarrollo o producción
+ * * y va a convertir en string toda la data que llegue
+ * desde la DB
+ */
 export const fetchWithToken = ( endpoint, data, method = 'GET' ) => {
     const url = `${ baseUrl }/${ endpoint }`; // localhost:4000/api/auth/new
     const token = localStorage.getItem( 'token' ) || '';

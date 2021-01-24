@@ -15,7 +15,10 @@ import { PublicRoute } from './PublicRoute';
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
-
+    /**
+     * Lee y si el que intenta loguearse existe,
+     * lo envía al /
+     */
     const { checking, uid } = useSelector( state => state.auth );
 
     useEffect( () => {
@@ -24,7 +27,10 @@ export const AppRouter = () => {
 
     }, [ dispatch ] );
 
-    // Podria poner un loading. Veremos.
+    /**
+     * Podría poner un loading mientras
+     * esperamos que retorne de la DB
+     */
     if ( checking ) {
         return <h5> Wait... </h5>
     }

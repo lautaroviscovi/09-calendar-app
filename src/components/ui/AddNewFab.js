@@ -5,7 +5,10 @@ import { uiOpenModal } from '../../actions/ui';
 export const AddNewFab = () => {
 
     const dispatch = useDispatch();
-
+    /**
+     * El botón abre el modal
+     * para crear un nuevo evento
+     */
     const handleClickNew = () => {
         dispatch( uiOpenModal() );
     }

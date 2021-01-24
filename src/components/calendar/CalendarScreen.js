@@ -20,39 +20,67 @@ export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
 
-    // Lectura de los eventos (se muestra en el calendario)
+    /**
+     * Lectura de los eventos del store para mostrar en el calendario
+     */
     const { events, activeEvent } = useSelector( state => state.calendar );
+    /**
+     * Lectura del uid de usuario
+     */
     const { uid } = useSelector( state => state.auth );
-
+    /**
+     * El localStora mantiene el último estado del calendario.
+     * Si estaba en Semana y recargo, debe volver a Semana,
+     * si algo falla, el estado se va a mantener en Mes.
+     */
     const [ lastView, setlastView ] = useState( localStorage.getItem( 'lastView' ) || 'month' );
-
+    /**
+     * El efecto está pendiente de los nuevos eventos
+     * que se van guardando para mostrarlos en pantalla
+     */
     useEffect( () => {
         
         dispatch( eventStartLoading() );
 
     }, [ dispatch ] );
 
-    // Trae los datos de la agenda
+    /**
+     * El doble click sobre un evento abre el modal
+     * para su lectura o edición
+     */
     const onDoubleClick = ( e ) => {
         dispatch( uiOpenModal() );
     }
-    // Selecciona el evento y lo marca como activo en el state
+    /**
+     * Selecciona el evento y lo marca como activo en el store
+     */
     const onSelectEvent = ( e ) => {
         dispatch( eventSetActive( e ) );
     }
-    // Muestra la vista (dia, semana, mes, año)
-    // El localStorage mantiene el estado
-    // Si estoy en semana y recargo, debe continuar
-    // en semana y no cambiar a dia, por ejemplo
+    /**
+     * Muestra la vista (dia, semana, mes, año)
+     * El localStorage mantiene el estado
+     * Si estoy en semana y recargo, debe continuar
+     * en semana y no cambiar a dia, por ejemplo
+     */
     const onViewChange = ( e ) => {
         setlastView( e );
         localStorage.setItem( 'lastView', e );
     }
-    // Desactiva la nota seleccionada previamente
+    /**
+     * Desactiva la nota previamente seleccionada
+     * y modifica su estado
+     */
     const onSelectSlot = ( e ) => {
         dispatch( eventClearActiveEvent() );
     }
-    // Pack de estilos para el evento
+    /**
+     * Pack de estilos de los eventos mostrados
+     * en el calendario.
+     * El ternario nos dice que si, un evento es de
+     * nuestra propiedad, se mostrará de un color,
+     * caso contrario, se mostrará de otro.
+     */
     const eventStyleGetter = ( event, start, end, isSelected ) => {
 
         const style = {
@@ -89,7 +117,7 @@ export const CalendarScreen = () => {
                     event: CalendarEvent
                 } }
             />
-
+            
             <AddNewFab />
             
             {

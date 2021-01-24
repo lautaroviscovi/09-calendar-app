@@ -5,7 +5,10 @@ import { eventStartDelete } from '../../actions/events';
 export const DeleteEventFab = () => {
 
     const dispatch = useDispatch();
-
+    /**
+     * Con un evento seleccionado y con su estado activo,
+     * aparece el botón 'delete' que nos permite eliminarlo.
+     */
     const handleDelete = () => {
         dispatch( eventStartDelete() );
     }

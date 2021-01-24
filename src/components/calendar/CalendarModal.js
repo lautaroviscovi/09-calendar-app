@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
 import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../actions/events';
 
+/**
+ * Estilos por defecto del React-Big-Calendar
+ */
 const customStyles = {
     content : {
       top                   : '50%',
@@ -24,7 +27,9 @@ const customStyles = {
   const now = moment().minutes( 0 ).seconds( 0 ).add( 1, 'hours' );
 
   const after = now.clone().add( 1, 'hours' );
-  // Mantengo el formulario limpio antes y despues de su uso
+  /**
+   * El initEvent mantiene formulario limpio antes y despues de su uso
+   */
   const initEvent = {
     title: '',
     notes: '',
@@ -36,24 +41,36 @@ export const CalendarModal = () => {
 
     const dispatch = useDispatch();
 
-    // Store
+    /**
+     * Lecturas del store
+     */
     const { modalOpen } = useSelector( state => state.ui );
 
     const { activeEvent } = useSelector( state => state.calendar );
-    // Manejo del estado de las fechas
+    /**
+     * Acá manejamos el estado de la fecha de inicio
+     */
     const [ dateStart, setDateStart ] = useState( now.toDate()  );
-    // Manejo del estado del titulo para saber si es valido o no
+    /**
+     * Manejo del estado del título para saber si es válido o no
+     */
     const [ titleValid, setTitleValid ] = useState( true );
-
+    /**
+     * Acá manejamos el estado de la fecha de finalizado
+     */
     const [ dateEnd, setdateEnd ] = useState( after.toDate() );
-    // Manejo el estado del formulario
-    // y el inicio y fin del evento
+    /**
+     * Seteo el estado inicial del modal del calendario
+     */
     const [ formValues, setformValues ] = useState( initEvent );
 
     const { title, notes, start, end } = formValues;
-    // El efecto esta pendiente de los cambios del activeEvent
-    // Si abro nuevamente el modal, debe traer la informacion
-    // y permitir editar
+
+    /**
+     * El efecto esta pendiente de los cambios del activeEvent
+     * Si abro nuevamente el modal, debe traer la informacion
+     * y permitir editar. Sino, devuelve el estado inicial
+     */
     useEffect( () => {
       if ( activeEvent ) {
         setformValues( activeEvent );
@@ -69,12 +86,19 @@ export const CalendarModal = () => {
       } ) 
     };
 
+    /**
+     * Cierra el modal y reinicia el estado
+     */
     const closeModal = () => {
       dispatch( uiCloseModal() );
       dispatch( eventClearActiveEvent() );
       setformValues( initEvent );
     };
 
+    /**
+     * Modifica los valores de la fecha de inicio en el
+     * nuevo evento del calendario
+     */
     const handleStartDateChange = ( e ) => {
       setDateStart( e )
       setformValues( {
@@ -83,6 +107,10 @@ export const CalendarModal = () => {
       } )
     };
 
+    /**
+     * Modifica los valores de la fecha de fin en el
+     * nuevo evento del calendario
+     */
     const handleEndDateChange = ( e ) => {
       setdateEnd( e )
       setformValues( {
@@ -90,7 +118,11 @@ export const CalendarModal = () => {
         end: e
       } )
     };
-    // Capturo los datos del evento
+    
+    /**
+     * Envío el nuevo evento.
+     * Valido que el título no sea menor a 2 caracteres
+     */
     const handleSubmitForm = ( e ) => {
       e.preventDefault();
       
@@ -105,8 +137,10 @@ export const CalendarModal = () => {
         return setTitleValid( false ); 
       }
 
-      // Graba un nuevo evento en el calendario
-      // Condiciona si el evento existe para editar o crear
+      /**
+       * Graba el nuevo evento con todo el estado del formulario
+       * y cierra el modal
+       */
       if ( activeEvent ){
         dispatch( eventStartUpdate( formValues ) );
       } else {
@@ -125,7 +159,7 @@ export const CalendarModal = () => {
             isOpen = { modalOpen }
             onRequestClose = { closeModal }
             style = { customStyles }
-            closeTimeoutMS = { 200  }
+            closeTimeoutMS = { 200 }
             className = 'modal'
             overlayClassName = 'modal-back'
             >

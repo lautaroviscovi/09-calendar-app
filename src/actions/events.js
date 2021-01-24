@@ -3,6 +3,12 @@ import { fetchWithToken } from "../helpers/fetch";
 import { prepareEvents } from "../helpers/prepareEvents";
 import { types } from "../types/types";
 
+/**
+ * Acción para crear un nuevo evento, toma el uid y name
+ * del usuario validado. Si todo es correcto,
+ * retorna el nuevo evento y retorna el id, uid, name
+ * y llama al eventAddNew para guardarlo
+ */
 export const eventStartAddNew = ( event ) => {
     return async ( dispatch, getState ) => {
         
@@ -27,29 +33,28 @@ export const eventStartAddNew = ( event ) => {
         } catch (error) {
             console.log(error)
         }
-        
-        
     }
 }
 
-const eventAddNew = ( event ) => ( {
-    type: types.eventAddNew,
-    payload: event
-} );
-
-// 
-
+/**
+ * Al hacer click en un evento, cambia el estado a activo
+ */
 export const eventSetActive = ( event ) => ( {
     type: types.eventSetActive,
     payload: event
 } );
 
+/**
+ * Al hacer click fuera de un evento, el estado cambia a inactivo
+ */
 export const eventClearActiveEvent = () => ( {
     type: types.eventClearActiveEvent
 } );
 
-// 
-
+/**
+ * Toma un evento seleccionado por id y despacha la
+ * acción para actualizarlo y guardalo
+ */
 export const eventStartUpdate = ( event ) => {
     return async ( dispatch ) => {
 
@@ -71,13 +76,9 @@ export const eventStartUpdate = ( event ) => {
     }
 };
 
-const eventUpdated = ( event ) => ( {
-    type: types.eventUpdated,
-    payload: event
-} );
-
-// 
-
+/**
+ * Toma un evento activo pasado o futuro por id y lo elimina de la base de datos. 
+ */
 export const eventStartDelete = ( event ) => {
     return async ( dispatch, getState ) => {
 
@@ -94,12 +95,10 @@ export const eventStartDelete = ( event ) => {
     }
 }
 
-const eventDeleted = () => ( {
-    type: types.eventDeleted
-} );
-
-// 
-
+/**
+ * La acción hace una petición de los eventos que son previaamente
+ * mapeados y formateados para finalmente mostrarlos en el calendario
+ */
 export const eventStartLoading = () => {
     return async ( dispatch ) => {
         
@@ -118,13 +117,28 @@ export const eventStartLoading = () => {
     }
 };
 
+/**
+ * Dispara la acción para salir de la sesión de usuario
+ */
+export const eventLogout = () => ( {
+    type: types.eventLogout
+} )
+
+const eventAddNew = ( event ) => ( {
+    type: types.eventAddNew,
+    payload: event
+} );
+
 const eventLoaded = ( events ) => ( { 
     type: types.eventLoaded,
     payload: events
  } )
+ 
+ const eventUpdated = ( event ) => ( {
+     type: types.eventUpdated,
+     payload: event
+ } );
 
-//  
-
-export const eventLogout = () => ( {
-    type: types.eventLogout
-} )
+ const eventDeleted = () => ( {
+    type: types.eventDeleted
+} );

@@ -24,12 +24,17 @@ export const LoginScreen = () => {
     const { lEmail, lPassword } = formLoginvalues;
 
     const { rName, rEmail, rPassword, rPassword2 } = formRegistervalues;
-
+    /**
+     * Llama a la acción startLogin para que el usuario registrado ingrese
+     */
     const handleLogin = ( e ) => {
         e.preventDefault();
         dispatch( startLogin( lEmail, lPassword ) );
     };
 
+    /**
+     * Llama a la acción startRegister para crear una cuenta nueva
+     */
     const handleRegister = ( e ) => {
         e.preventDefault();
         dispatch( startRegister( rName, rEmail, rPassword ) );
@@ -38,7 +43,6 @@ export const LoginScreen = () => {
             return Swal.fire('Error', 'Passwords must be the same', 'error');
         }
     };
-
 
     return (
 
@@ -115,6 +119,7 @@ export const LoginScreen = () => {
                                 name = 'rPassword'
                                 value = { rPassword }
                                 onChange = { handleRegisterInputChange }
+                                required = { true }
                             />
                         </div>
 
@@ -126,6 +131,7 @@ export const LoginScreen = () => {
                                 name = 'rPassword2'
                                 value = { rPassword2 }
                                 onChange = { handleRegisterInputChange }
+                                required = { true }
                             />
                         </div>
 

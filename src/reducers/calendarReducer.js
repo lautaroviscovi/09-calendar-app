@@ -50,7 +50,9 @@ export const calendarReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 events: state.events.map(
-                    // Devuelvo el id del nuevo evento, sino devuelvo el evento 
+                    /**
+                     * Devuelvo el id del nuevo evento, sino devuelvo el evento
+                     */
                     e => ( e.id === action.payload.id ) ? action.payload : e
                 )
             }
@@ -59,9 +61,12 @@ export const calendarReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 events: state.events.filter(
-                    // Filtro el evento y si es diferente
-                    // al evento del estado lo devuelve
-                    // Por ultimo declara el activeEvent como null
+                    /**
+                     * Filtro el evento y si es diferente
+                     * al evento del estado lo devuelve
+                     * Por ultimo declara el activeEvent como null
+                     * y lo borra de la DB
+                     */
                     e => ( e.id !== state.activeEvent.id )
                 ),
                 activeEvent: null
