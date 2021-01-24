@@ -122,7 +122,7 @@ export const LoginScreen = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Repeat ******" 
+                                placeholder="******" 
                                 name = 'rPassword2'
                                 value = { rPassword2 }
                                 onChange = { handleRegisterInputChange }
