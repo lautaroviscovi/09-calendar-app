@@ -67,11 +67,12 @@ html, body {
 /* Fabs */
 .fab {
     border-radius: 100%;
-    bottom: 25px;
-    font-size: 30px;
-    padding: 25px;
+    bottom: 20px;
+    display: flex;
+    font-size: 25px;
+    padding: 18px;
     position: fixed;
-    right: 25px;
+    right: 20px;
 }
 
 .fab-danger {

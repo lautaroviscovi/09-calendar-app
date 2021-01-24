@@ -9,7 +9,6 @@ export const types = {
     eventUpdated: '[event] Event updated',
     eventDeleted: '[event] Event deleted',
 
-    authChecking: '[Auth] Checking login state',
     authCheckingFinish: '[Auth] Checking finish login state',
     authStartLogin: '[Auth] Start login',
     authLogin: '[Auth] Login',
