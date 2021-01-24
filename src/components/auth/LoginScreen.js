@@ -12,14 +12,14 @@ export const LoginScreen = () => {
                             <input 
                                 type="text"
                                 className="form-control"
-                                placeholder="Correo"
+                                placeholder="E-mail"
                             />
                         </div>
                         <div className="form-group">
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Contraseña"
+                                placeholder="Password"
                             />
                         </div>
                         <div className="form-group">
@@ -39,21 +39,21 @@ export const LoginScreen = () => {
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Nombre"
+                                placeholder="Name"
                             />
                         </div>
                         <div className="form-group">
                             <input
                                 type="email"
                                 className="form-control"
-                                placeholder="Correo"
+                                placeholder="E-mail"
                             />
                         </div>
                         <div className="form-group">
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Contraseña" 
+                                placeholder="Password" 
                             />
                         </div>
 
@@ -61,7 +61,7 @@ export const LoginScreen = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Repita la contraseña" 
+                                placeholder="Repeat password" 
                             />
                         </div>
 
@@ -69,7 +69,7 @@ export const LoginScreen = () => {
                             <input 
                                 type="submit" 
                                 className="btnSubmit" 
-                                value="Crear cuenta" />
+                                value="Create account" />
                         </div>
                     </form>
                 </div>
