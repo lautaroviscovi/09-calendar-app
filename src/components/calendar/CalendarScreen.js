@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { eventClearActiveEvent, eventSetActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
+import { messages } from '../../helpers/calendar-messages';
 
 const localizer = momentLocalizer( moment );
 
@@ -69,6 +70,7 @@ export const CalendarScreen = () => {
                 events = { events }
                 startAccessor = 'start'
                 endAccessor = 'end'
+                messages = { messages }
                 eventPropGetter = { eventStyleGetter }
                 onDoubleClickEvent = { onDoubleClick }
                 onSelectEvent = { onSelectEvent }
