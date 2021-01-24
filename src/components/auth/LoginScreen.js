@@ -15,10 +15,10 @@ export const LoginScreen = () => {
     } );
 
     const [ formRegistervalues, handleRegisterInputChange ] = useForm( {
-        rName: 'Gwynne',
-        rEmail: 'gshotwell@spacex.com',
-        rPassword: '123456',
-        rPassword2: '123456'
+        rName: '',
+        rEmail: '',
+        rPassword: '',
+        rPassword2: ''
     } );
 
     const { lEmail, lPassword } = formLoginvalues;
@@ -53,7 +53,7 @@ export const LoginScreen = () => {
                             <input 
                                 type="text"
                                 className="form-control"
-                                placeholder="E-mail"
+                                placeholder="elon@spacex.com"
                                 name = 'lEmail'
                                 value = { lEmail }
                                 onChange = { handleLoginInputChange }
@@ -63,7 +63,7 @@ export const LoginScreen = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Password"
+                                placeholder="******"
                                 name = 'lPassword'
                                 value = { lPassword }
                                 onChange = { handleLoginInputChange }
@@ -91,7 +91,7 @@ export const LoginScreen = () => {
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Name"
+                                placeholder="Elon Musk"
                                 name = 'rName'
                                 value = { rName }
                                 onChange = { handleRegisterInputChange }
@@ -101,7 +101,7 @@ export const LoginScreen = () => {
                             <input
                                 type="email"
                                 className="form-control"
-                                placeholder="E-mail"
+                                placeholder="elon@spacex.com"
                                 name = 'rEmail'
                                 value = { rEmail }
                                 onChange = { handleRegisterInputChange }
@@ -111,7 +111,7 @@ export const LoginScreen = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Password" 
+                                placeholder="******" 
                                 name = 'rPassword'
                                 value = { rPassword }
                                 onChange = { handleRegisterInputChange }
@@ -122,7 +122,7 @@ export const LoginScreen = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Repeat password" 
+                                placeholder="Repeat ******" 
                                 name = 'rPassword2'
                                 value = { rPassword2 }
                                 onChange = { handleRegisterInputChange }
