@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     BrowserRouter as Router,
     Switch,
     Redirect,
-    Route, 
   } from "react-router-dom";
 
 import { startChecking } from '../actions/auth';
 import { LoginScreen } from '../components/auth/LoginScreen';
 import { CalendarScreen } from '../components/calendar/CalendarScreen';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
+
+    const { checking, uid } = useSelector( state => state.auth );
 
     useEffect( () => {
         
@@ -21,24 +24,30 @@ export const AppRouter = () => {
 
     }, [ dispatch ] );
 
+    // Podria poner un loading. Veremos.
+    if ( checking ) {
+        return <h5> Wait... </h5>
+    }
 
     return (
             <Router>
                 <div>
                     <Switch>
                         
-                        <Route path = '/login'
+                        <PublicRoute path = '/login'
                         component = { LoginScreen }
+                        isAuthenticated = { !!uid }
                         />
                     
 
-                        <Route
+                        <PrivateRoute
                         exact
                         path = '/'
                         component = { CalendarScreen }
+                        isAuthenticated = { !!uid }
                         />
 
-                        <Redirect to = '/' />
+                        <Redirect to = '/login' />
 
                     </Switch>
                 </div>
