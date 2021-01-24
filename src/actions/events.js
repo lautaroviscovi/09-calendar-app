@@ -77,7 +77,23 @@ const eventUpdated = ( event ) => ( {
 
 // 
 
-export const eventDeleted = ( event ) => ( {
+export const eventStartDelete = ( event ) => {
+    return async ( dispatch, getState ) => {
+
+        const { id } = getState().calendar.activeEvent;
+
+        const response = await fetchWithToken( `events/${ id }`, {}, 'DELETE');
+        const body = await response.json();
+
+        if ( body.Ok ) {
+            dispatch( eventDeleted() );
+        } else {
+            Swal.fire('Error', body.msg, 'error');
+        }
+    }
+}
+
+const eventDeleted = () => ( {
     type: types.eventDeleted
 } );
 
