@@ -23,6 +23,14 @@ export const startLogin = ( email, password ) => {
     }
 };
 
+export const startLogout = () => {
+    return ( dispatch ) => {
+
+        localStorage.clear();
+        dispatch( logout() );
+    }
+};
+
 
 
 export const startRegister = ( name, email, password ) => {
@@ -69,6 +77,10 @@ const login = ( user ) => ( {
     type: types.authLogin,
     payload: user
  } );
+
+const logout = () => ( { 
+    type: types.authLogout
+ } )
 
 const checkingFinish = () => ( {
     type: types.authCheckingFinish
