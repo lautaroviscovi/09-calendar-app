@@ -69,10 +69,11 @@ html, body {
     border-radius: 100%;
     bottom: 20px;
     display: flex;
-    font-size: 25px;
+    font-size: 30px;
     padding: 18px;
     position: fixed;
     right: 20px;
+    z-index: 100;
 }
 
 .fab-danger {
@@ -80,4 +81,5 @@ html, body {
     padding: 10px;
     position: fixed;
     left: 25px;
+    z-index: 100;
 }

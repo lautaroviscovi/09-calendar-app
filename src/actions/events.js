@@ -15,11 +15,12 @@ export const eventStartAddNew = ( event ) => {
 
             if ( body.Ok ) {
                 event.id = body.event.id;
+            
                 event.user = {
                     _id: uid,
                     name: name
                 }
-
+                
                 dispatch( eventAddNew() );
             }
 
